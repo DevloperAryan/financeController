@@ -3,7 +3,6 @@ import path from "path";
 import Papa from "papaparse";
 import { supabase } from "./db";
 
-// Sales CSV load karke Supabase mein daalna
 async function loadSales() {
   const filePath = path.join(process.cwd(), "data", "sales.csv");
   const fileContent = fs.readFileSync(filePath, "utf-8");
@@ -23,7 +22,6 @@ async function loadSales() {
   else console.log(`✓ ${rows.length} sales records loaded`);
 }
 
-// Bank statement CSV load karke Supabase mein daalna (raw, abhi clean nahi kiya)
 async function loadBankRecords() {
   const filePath = path.join(process.cwd(), "data", "bank-statement.csv");
   const fileContent = fs.readFileSync(filePath, "utf-8");

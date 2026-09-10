@@ -27,7 +27,7 @@ export default function Home() {
   const [checking, setChecking] = useState(true);
   const resultsHeading = useRef<HTMLHeadingElement>(null);
 
-  // On first load, check if data already exists in the database —
+  // On first load, check if data already exists in the database
   // this is what makes results survive a page refresh
   useEffect(() => {
     async function loadExisting() {

@@ -11,7 +11,6 @@ export function parseUploadedFile(fileName: string, fileBuffer: Buffer): any[] {
     const sheet = workbook.Sheets[firstSheetName];
     return XLSX.utils.sheet_to_json(sheet);
   } else {
-    // CSV maan lo
     const text = fileBuffer.toString("utf-8");
     const parsed = Papa.parse(text, { header: true, skipEmptyLines: true });
     return parsed.data;

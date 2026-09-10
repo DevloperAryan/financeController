@@ -6,7 +6,6 @@ import { supabase } from "./db";
 export async function findExceptions() {
 
   await supabase.from("exceptions").delete().neq("id", 0);
-  // Un-matched sales dhoondo
   const { data: sales } = await supabase.from("sales").select("*");
   const { data: matches } = await supabase.from("matches").select("sale_id");
   const matchedSaleIds = new Set((matches ?? []).map((m) => m.sale_id));
@@ -22,7 +21,6 @@ export async function findExceptions() {
     console.log(`✗ Exception: ${sale.id} — no bank match found`);
   }
 
-  // Un-matched bank records dhoondo (extra/bogus entries)
   const { data: unmatchedBank } = await supabase
     .from("bank_records")
     .select("*")

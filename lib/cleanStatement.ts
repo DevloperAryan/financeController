@@ -30,8 +30,7 @@ async function cleanOneRecord(id: number, rawText: string) {
 
         const content = response.choices[0].message.content ?? "{}";
 
-        // Kabhi kabhi model markdown ```json wrap kar deta hai ya extra text likh deta hai —
-        // isliye pehla { se lekar aakhri } tak nikaal lo, safe rehta hai
+       
         const jsonMatch = content.match(/\{[\s\S]*\}/);
         if (!jsonMatch) {
             throw new Error(`No JSON found in response: ${content}`);

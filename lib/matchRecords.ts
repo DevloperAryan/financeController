@@ -19,7 +19,6 @@ export async function matchRecords() {
   let matchCount = 0;
 
   for (const sale of sales) {
-    // Pehle already matched hue sale ko skip karo
     const { data: existing } = await supabase
       .from("matches")
       .select("id")
@@ -27,13 +26,12 @@ export async function matchRecords() {
       .maybeSingle();
     if (existing) continue;
 
-    // Best match dhoondo: amount close ho (within ₹5, fee-deduction allow karne ke liye)
-    // aur date 2 din ke andar ho
+  
     const match = bankRecords.find((b) => {
       if (b.cleaned_amount == null || b.cleaned_date == null) return false;
 
       const amountDiff = Math.abs(sale.amount - b.cleaned_amount);
-      const amountOk = amountDiff <= 5 || amountDiff <= sale.amount * 0.03; // ₹5 ya 3% tak allow
+      const amountOk = amountDiff <= 5 || amountDiff <= sale.amount * 0.03; 
 
       const saleDate = new Date(sale.sale_date).getTime();
       const bankDate = new Date(b.cleaned_date).getTime();
